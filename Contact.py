@@ -56,5 +56,47 @@ def update_contact(contacts):
         print(f"Contact '{name}' updated successfully.")
     else:
         print(f"Contact '{name}' not found.")
-
   
+def search_contact(contacts):
+    """Search for a contact by name."""
+    name = input("Enter the name of the contact to search: ").strip()
+    if name in contacts:
+        info = contacts[name]
+        print(f"Found contact - {name}: {info['phone']}, {info['email']}")
+    else:
+        print(f"Contact '{name}' not found.")
+
+def main():
+    filename = "contacts.json"
+    contacts = load_contacts(filename)
+
+    while True:
+        print("\nContact Management System")
+        print("1. Add Contact")
+        print("2. View Contacts")
+        print("3. Delete Contact")
+        print("4. Update Contact")
+        print("5. Search Contact")
+        print("6. Exit")
+        
+        choice = input("Select an option (1-6): ").strip()
+        
+        if choice == "1":
+            add_contact(contacts)
+        elif choice == "2":
+            view_contacts(contacts)
+        elif choice == "3":
+            delete_contact(contacts)
+        elif choice == "4":
+            update_contact(contacts)
+        elif choice == "5":
+            search_contact(contacts)
+        elif choice == "6":
+            save_contacts(filename, contacts)
+            print("Exiting the program. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please select again.")
+
+if __name__ == "__main__":
+    main()
